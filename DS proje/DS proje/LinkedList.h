@@ -11,6 +11,13 @@ protected:
 	int list_size=0;
 public:
 	LinkedList() { ; }
+	~LinkedList()
+	{
+		while (this->isEmpty() == false)
+		{
+			popFront();
+		}
+	}
 	bool isEmpty()
 	{
 		if (this->list_size == 0)return true;
