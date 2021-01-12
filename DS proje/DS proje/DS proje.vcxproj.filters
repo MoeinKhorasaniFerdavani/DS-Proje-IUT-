@@ -32,5 +32,11 @@
     <ClInclude Include="MapPair.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BTreeNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AVLTreeNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
