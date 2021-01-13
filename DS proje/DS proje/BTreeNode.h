@@ -21,4 +21,15 @@ public:
 			return true;
 		return false;
 	}
+	bool isLeftChild()
+	{
+		if (parent == nullptr)return false;
+		if (parent->left == this)return true;
+		return false;
+	}
+	bool isRightChild()
+	{
+		if (parent == nullptr)return false;
+		return !isLeftChild();
+	}
 };

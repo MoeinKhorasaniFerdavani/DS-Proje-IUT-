@@ -8,18 +8,19 @@ using namespace std;
 
 int main()
 {
-	BST<int>b;
-	b.insert(3);
-	b.insert(1);
-	b.insert(2);
-	b.insert(4);
-	b.insert(5);
-	b.insert(0);
+	BST<string>b;
+	b.insert("moein");
+	b.insert("ali");
+	b.insert("mohammad");
+	b.insert("alireza");
+	b.insert("alimohammad");
+	b.insert("avin");
 
 	
 	
 	
 	
 	b.print();
+	cout<<b.succesor("moein");
 	return 0;
 }

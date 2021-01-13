@@ -47,6 +47,48 @@ class BST
 	
 protected:
 	BTreeNode<T>* root = nullptr;
+	BTreeNode<T>* succesor(BTreeNode<T>* n)
+	{
+		if (n == nullptr)return nullptr;
+		if (n->right==nullptr)
+		{
+			if (n->isLeftChild())return n->parent;
+			BTreeNode<T>* curr = n;
+			while (curr->isRightChild())
+			{
+				curr = curr->parent;
+			}
+			return curr->parent;
+		}
+		else
+		{
+			BTreeNode<T>* curr = n->right;
+			while (curr->left != nullptr)
+			{
+				curr = curr->left;
+			}
+			return curr;
+		}
+	}
+	BTreeNode<T>* findPtr(const T& input)
+	{
+		BTreeNode<T>* curr = this->root;
+		while (curr != nullptr)
+		{
+			if (curr->data == input)
+				return curr;
+			if (input >= curr->data)
+			{
+				curr = curr->right;
+			}
+			else
+			{
+				curr = curr->left;
+			}
+
+		}
+		return nullptr;
+	}
 public:
 	BST() { ; }
 	bool isEmpty()
@@ -104,6 +146,16 @@ public:
 
 		}
 		return 0;
+	}
+	T succesor(const T& input)
+	{
+		auto n = findPtr(input);
+		auto s = succesor(n);
+		if (s != nullptr)
+		{
+			return s->data;
+		}
+		throw "error";
 	}
 	void print()
 	{
