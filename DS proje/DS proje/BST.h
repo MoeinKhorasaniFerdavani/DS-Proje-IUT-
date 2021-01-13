@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include "BTreeNode.h"
 using namespace std;
@@ -6,27 +6,45 @@ using namespace std;
 template <class  T>
 class BST
 {
-	void printRec(BTreeNode<T>* n, int tab)
+	
+	
+	void printBT(const string& prefix, const BTreeNode<T>* n, bool isLeft)
 	{
-		if (n == nullptr)return;
-		cout << n->data;
-		for (int i = 0; i < 2; i++)
+		if (n != nullptr)
 		{
-			int i = -77;
-			char c = i;
-			cout << c << endl;
+			std::cout << prefix;
 
+			char h = (char)-60;
+			char r = (char)-61;
+			char l = (char)-64;
+			char u = (char)-77;
+			//-60
+			if (isLeft)
+				//-61
+				cout << r<<h<<h;
+			else
+				//-64
+				cout << l<<h<<h;
+			
+
+			// print the value of the node
+			std::cout << n->data << std::endl;
+			string temp;
+			if (isLeft)
+			{
+				temp = u;
+				temp.append("   ");
+			}
+			else
+				temp = "    ";
+			// enter the next tree level - left and right branch
+			printBT(prefix + temp, n->left, true);
+			printBT(prefix + temp, n->right, false);
 		}
-		for (int i = 0; i < 2; i++)
-		{
-			int i = -51;
-			char c = i;
-			cout << c ;
-		}
-		cout << ' ';
-
-
 	}
+
+
+	
 protected:
 	BTreeNode<T>* root = nullptr;
 public:
@@ -89,7 +107,9 @@ public:
 	}
 	void print()
 	{
-
+		cout << endl;
+		printBT("", this->root, false);
+		cout << endl;
 	}
 };
 

@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include "linkedlist.h"
 #include "Queue.h"
 #include "MapPair.h"
@@ -13,14 +13,13 @@ int main()
 	b.insert(1);
 	b.insert(2);
 	b.insert(4);
+	b.insert(5);
+	b.insert(0);
 
-	cout << b.find(1) << '\t' << b.find(4);
 	
-	for (int i = -120; i < 90; i++)
-	{
-		char c = i;
-		
-		cout <<i<<'\t'<< c << endl;
-	}
+	
+	
+	
+	b.print();
 	return 0;
 }
