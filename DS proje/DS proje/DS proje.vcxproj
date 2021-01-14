@@ -142,6 +142,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AVLTree.h" />
     <ClInclude Include="AVLTreeNode.h" />
     <ClInclude Include="BST.h" />
     <ClInclude Include="BTreeNode.h" />

@@ -5,9 +5,11 @@ using namespace std;
 template <class T>
 class BTreeNode
 {
+
 public:
 	T data;
 	BTreeNode<T>* parent = nullptr, * left = nullptr, * right = nullptr;
+	int height = 0;
 	BTreeNode(const T& data, BTreeNode<T>* parent = nullptr, BTreeNode<T>* left=nullptr, BTreeNode<T>* right=nullptr)
 	{
 		this->data = data;

@@ -206,7 +206,7 @@ public:
 			return true;
 		return false;
 	}
-	void insert(const T& input)
+	virtual void insert(const T& input)
 	{
 		if (this->isEmpty())
 		{
@@ -266,7 +266,7 @@ public:
 		}
 		throw "error";
 	}
-	T remove(const T& input)
+	virtual T remove(const T& input)
 	{
 		auto n = findPtr(input);
 		return deleteNode(n);
