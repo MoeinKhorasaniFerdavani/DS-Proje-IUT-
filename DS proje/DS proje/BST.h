@@ -89,6 +89,115 @@ protected:
 		}
 		return nullptr;
 	}
+	T deleteNode(BTreeNode<T>* n)
+	{
+		if (n == nullptr)return T();
+		T res = n->data;
+		//no children
+		if (n->isLeaf())
+		{
+			if (n == root)
+			{
+				delete n;
+				n = root = nullptr;
+			}
+			else
+			{
+				if (n->isLeftChild())
+					n->parent->left = nullptr;
+				else
+					n->parent->right = nullptr;
+				delete n;
+				n = nullptr;
+			}
+			return res;
+		}
+		//one child
+		else if (n->left == nullptr)
+		{
+			BTreeNode<T>* r = n->right, *p = n->parent;
+			r->parent = n->parent;
+			if (n == root)
+			{
+				root = r;
+			}
+			else
+			{
+				if (n->isLeftChild())
+				{
+					p->left = r;
+				}
+				else
+				{
+					p->right = r;
+				}
+			}
+			delete n;
+			n = nullptr;
+			return res;
+		}
+		//two children
+		else if (n->right == nullptr)
+		{
+			BTreeNode<T>* l = n->left, *p = n->parent;
+			l->parent = n->parent;
+			if (n == root)
+			{
+				root = l;
+			}
+			else
+			{
+				if (n->isLeftChild())
+				{
+					p->left = l;
+				}
+				else
+				{
+					p->right = l;
+				}
+			}
+			delete n;
+			n = nullptr;
+			return res;
+		}
+		else
+		{
+			BTreeNode<T>* s = succesor(n);
+			if (s->isLeftChild())
+			{
+				s->parent->left = s->right;
+			}
+			else
+			{
+				s->parent->right = s->right;
+			}
+			//put s instead of n
+			s->parent = n->parent;
+			s->left = n->left;
+			s->right = n->right;
+			if (n == root)
+			{
+				root = s;
+			}
+			else
+			{
+				if (n->isLeftChild())
+				{
+					n->parent->left = s;
+				}
+				else
+				{
+					n->parent->right = s;
+				}
+			}
+			delete n;
+			n = nullptr;
+			return res;
+			
+		}
+		
+
+	}
 public:
 	BST() { ; }
 	bool isEmpty()
@@ -156,6 +265,11 @@ public:
 			return s->data;
 		}
 		throw "error";
+	}
+	T remove(const T& input)
+	{
+		auto n = findPtr(input);
+		return deleteNode(n);
 	}
 	void print()
 	{

@@ -32,4 +32,5 @@ public:
 		if (parent == nullptr)return false;
 		return !isLeftChild();
 	}
+	
 };
