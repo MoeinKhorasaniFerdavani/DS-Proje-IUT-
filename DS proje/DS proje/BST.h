@@ -169,7 +169,7 @@ protected:
 			n = nullptr;
 			return res;
 		}
-		//two children
+		
 		else if (n->right == nullptr)
 		{
 			BTreeNode<T>* l = n->left, *p = n->parent;
@@ -193,6 +193,7 @@ protected:
 			n = nullptr;
 			return res;
 		}
+		//two children
 		else
 		{
 			BTreeNode<T>* s = succesor(n);
@@ -208,6 +209,14 @@ protected:
 			s->parent = n->parent;
 			s->left = n->left;
 			s->right = n->right;
+			if (s->left)
+			{
+				s->left->parent = s;
+			}
+			if (s->right)
+			{
+				s->right->parent = s;
+			}
 			if (n == root)
 			{
 				root = s;
@@ -239,7 +248,7 @@ public:
 			return true;
 		return false;
 	}
-	virtual void insert(const T& input)
+    void insert(const T& input)
 	{
 		insertPrivate(input);
 	}
@@ -272,7 +281,7 @@ public:
 		}
 		throw "error";
 	}
-	virtual T remove(const T& input)
+	T remove(const T& input)
 	{
 		auto n = findPtr(input);
 		return deleteNode(n);
