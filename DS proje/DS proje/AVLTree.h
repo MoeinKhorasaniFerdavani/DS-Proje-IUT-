@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include "AVLTreeNode.h"
 #include "BST.h"
 using namespace std;
 
@@ -19,6 +18,7 @@ protected:
 	}
 	int bf(BTreeNode<T>* n)
 	{
+		if (n == nullptr)return 0;
 		if (n->left && n->right)
 		{
 			return n->left->height - n->right->height;
@@ -104,6 +104,182 @@ protected:
         return p;
 
     }
+	BTreeNode<T>* lrRotation(BTreeNode<T>* n)
+	{
+		if (!n)return n;
+		auto p = n->parent;
+		auto l = n->left;
+		lRotation(l);
+		rRotation(n);
+		return p;
+
+	}
+	BTreeNode<T>* rlRotation(BTreeNode<T>* n)
+	{
+		if (!n)return n;
+		auto p = n->parent;
+		auto r = n->right;
+		rRotation(r);
+		lRotation(n);
+		return p;
+	}
+
+    void  balance(BTreeNode<T>* n)
+    {
+        for (auto curr = n; curr != nullptr;)
+        {
+			
+
+            if (bf(curr) > 1)//bf==2
+            {
+				if (bf(curr->left) == -1)
+					curr = lrRotation(curr);
+				else
+					curr = rRotation(curr);
+            }
+            else if (bf(curr) < -1)//bf==-2
+            {
+				if (bf(curr->right) == 1)
+					curr = rlRotation(curr);
+				else
+					curr = lRotation(curr);
+            }
+            else
+                curr = curr->parent;
+        }
+		
+		
+    }
+
+	T deleteNode(BTreeNode<T>* n)
+	{
+		if (n == nullptr)return T();
+		T res = n->data;
+		//no children
+		if (n->isLeaf())
+		{
+			if (n == this->root)
+			{
+				delete n;
+				n = this->root = nullptr;
+			}
+			else
+			{
+				auto p = n->parent;
+				if (n->isLeftChild())
+					n->parent->left = nullptr;
+				else
+					n->parent->right = nullptr;
+				
+				this->balance(p);
+
+				delete n;
+				n = nullptr;
+			}
+			return res;
+		}
+		//one child
+		else if (n->left == nullptr)
+		{
+			BTreeNode<T>* r = n->right, * p = n->parent;
+			r->parent = n->parent;
+			if (n == this->root)
+			{
+				this->root = r;
+			}
+			else
+			{
+				if (n->isLeftChild())
+				{
+					p->left = r;
+				}
+				else
+				{
+					p->right = r;
+				}
+				this->balance(p);
+			}
+			delete n;
+			n = nullptr;
+			return res;
+		}
+		
+		else if (n->right == nullptr)
+		{
+			BTreeNode<T>* l = n->left, * p = n->parent;
+			l->parent = n->parent;
+			if (n == this->root)
+			{
+				this->root = l;
+				
+			}
+			else
+			{
+				if (n->isLeftChild())
+				{
+					p->left = l;
+				}
+				else
+				{
+					p->right = l;
+				}
+				this->balance(p);
+			}
+			delete n;
+			n = nullptr;
+			return res;
+		}
+		//two children
+		else
+		{
+			BTreeNode<T>* s = this->succesor(n);
+			auto sp = s->parent;//sp : succesoor parent
+			if (s->isLeftChild())
+			{
+				s->parent->left = s->right;
+			}
+			else
+			{
+				s->parent->right = s->right;
+			}
+			//put s instead of n
+			s->parent = n->parent;
+			s->left = n->left;
+			s->right = n->right;
+			if (s->left)
+			{
+				s->left->parent = s;
+			}
+			if (s->right)
+			{
+				s->right->parent = s;
+			}
+			if (n == this->root)
+			{
+				this->root = s;
+			}
+			else
+			{
+				if (n->isLeftChild())
+				{
+					n->parent->left = s;
+				}
+				else
+				{
+					n->parent->right = s;
+				}
+			}
+
+			this->balance(sp);
+
+			delete n;
+			n = nullptr;
+			return res;
+
+		}
+
+
+	}
     
 public:
 	AVLTree()
@@ -111,27 +287,20 @@ public:
 	{
 		;
 	}
-    virtual void insert(const T& input)
+      void insert(const T& input)
     {
         BTreeNode<T>* n = BST<T>::insertPrivate(input);
         for (auto curr = n; curr != nullptr; curr = curr->parent)
         {
             updateHeight(curr);
         }
-        for (auto curr = n; curr != nullptr;)
-        {
-            if (bf(curr) > 1)
-            {
-                curr = rRotation(curr);
-            }
-            else if (bf(curr) < -1)
-            {
-                curr = lRotation(curr);
-            }
-            else
-                curr = curr->parent;
-        }
+        this->balance(n);
        
     }
+	  T remove(const T& input)
+	  {
+		  auto n = this->findPtr(input);
+		  return deleteNode(n);
+	  }
 
 };
