@@ -89,6 +89,39 @@ protected:
 		}
 		return nullptr;
 	}
+	BTreeNode<T>* insertPrivate(const T& input)
+	{
+		if (this->isEmpty())
+		{
+			this->root = new BTreeNode<T>(input);
+			return root;
+		}
+		BTreeNode<T>* curr = this->root;
+		while (true)
+		{
+			if (input >= curr->data)
+			{
+				if (curr->right == nullptr)break;
+				curr = curr->right;
+			}
+			else
+			{
+				if (curr->left == nullptr)break;
+				curr = curr->left;
+			}
+		}
+		if (input >= curr->data)
+		{
+			curr->right = new BTreeNode<T>(input, curr);
+			return curr->right;
+		}
+		else
+		{
+			curr->left = new BTreeNode<T>(input, curr);
+			return curr->left;
+		}
+
+	}
 	T deleteNode(BTreeNode<T>* n)
 	{
 		if (n == nullptr)return T();
@@ -208,34 +241,7 @@ public:
 	}
 	virtual void insert(const T& input)
 	{
-		if (this->isEmpty())
-		{
-			this->root = new BTreeNode<T>(input);
-			return;
-		}
-		BTreeNode<T>* curr = this->root;
-		while (true)
-		{
-			if (input >= curr->data)
-			{
-				if (curr->right == nullptr)break;
-				curr = curr->right;
-			}
-			else
-			{
-				if (curr->left == nullptr)break;
-				curr = curr->left;
-			}
-		}
-		if (input >= curr->data)
-		{
-			curr->right = new BTreeNode<T>(input, curr);
-		}
-		else
-		{
-			curr->left = new BTreeNode<T>(input, curr);
-		}
-
+		insertPrivate(input);
 	}
 	bool find(const T& input)
 	{
