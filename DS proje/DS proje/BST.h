@@ -240,8 +240,25 @@ protected:
 		
 
 	}
+	void clearPrivate(BTreeNode<T>* n)
+	{
+		if (n == nullptr)return;
+		clearPrivate(n->left);
+		clearPrivate(n->right);
+		delete n;
+		n = nullptr;
+	}
 public:
 	BST() { ; }
+	void clear()
+	{
+		clearPrivate(this->root);
+		root = nullptr;
+	}
+	~BST()
+	{
+		clear();
+	}
 	bool isEmpty()
 	{
 		if (this->root == nullptr)

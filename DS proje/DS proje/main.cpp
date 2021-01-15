@@ -26,7 +26,7 @@ int main()
 	a.remove(7);
 	
 	a.remove(4);
-	
+	a.clear();
 	a.insert(4);
 	a.insert(6);
 	a.insert(7);
@@ -36,5 +36,6 @@ int main()
 
 	a.print();
 	a.find(3);
+	a.clear();
 	return 0;
 }
