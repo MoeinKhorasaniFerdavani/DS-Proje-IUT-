@@ -5,22 +5,30 @@
 #include "BST.h"
 #include "AVLTree.h"
 #include "CircularLinkedList.h"
+#include "FibonancciHeapNode.h"
+#include "FibonancciHeap.h"
 using namespace std;
 
 int main()
 {
-	CircularLinkedList<int> lst;
-	lst.pushFront(2);
-	lst.print();
-	lst.~CircularLinkedList();
-	Node<int>* n=lst.pushBack(3);
-	lst.pushBack(4);
-	lst.pushFront(1);
-	Node<int>* t=lst.pushBefor(0, n);
-	lst.print();
-	lst.popNode(t);
-	lst.print();
-	lst.~CircularLinkedList();
-	lst.print();
+	FibonancciHeap<int>f(2);
+	f.insert(1);
+	f.insert(7);
+	f.extractMin();
+	f.insert(5);
+	f.insert(0);
+	
+	f.insert(1);
+	f.extractMin();
+	f.insert(4);
+	f.insert(3);
+	
+	f.extractMin();
+	cout << f.getMin() << endl;
+	f.clear();
+	f.insert(10);
+	f.insert(11);
+	f.extractMin();
+	cout << f.getMin() << endl;
 	return 0;
 }

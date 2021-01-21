@@ -1,0 +1,161 @@
+#pragma once
+#include <iostream>
+#include "FibonancciHeapNode.h"
+using namespace std;
+
+template <class T>
+class FibonancciHeap
+{
+	FibonancciHeapNode<T>* root;
+	//min is the first child of root
+	int size;
+	void updateMin()
+	{
+		if (root->first_child == nullptr)return;
+		auto head = root->first_child;
+		auto tail = head->befor;
+		T min = head->data;
+		for (auto curr = head;; curr = curr->next)
+		{
+			if (curr->data < min)
+			{
+				min = curr->data;
+				root->first_child = curr;
+			}
+			if (curr == tail)
+				break;
+
+		}
+	}
+	void consolidate()
+	{
+		if (isEmpty())return;
+		//allocation the array that should hold the address of node with sepephic degree
+		FibonancciHeapNode<T>** arr = new FibonancciHeapNode<T>*[log2(this->size)];
+		//initilze it with nullptr
+		for (int i = 0; i < log2(this->size);i++)
+		{
+			arr[i] = nullptr;
+		}
+		//using direct addressing
+		FibonancciHeapNode<T>* curr = this->root->first_child;
+		FibonancciHeapNode<T>* next;
+		while (true)
+		{
+			next = curr->next;
+			int d = curr->degree;
+			while (true)
+			{
+				
+				if (arr[d] == nullptr)
+				{
+					arr[d] = curr;
+					break;
+				}
+				else
+				{
+					if (curr->data < arr[d]->data)
+					{
+						root->cutChild(arr[d]);
+						curr->addChild(arr[d]);
+						arr[d] = nullptr;
+						d = curr->degree;
+					}
+					else
+					{
+						root->cutChild(curr);
+						arr[d]->addChild(curr);
+						d = arr[d]->degree;
+						curr = arr[d];
+						arr[d] = nullptr;
+						
+					}
+				}
+			}
+			
+			curr =next;
+			if (curr == root->first_child)break;
+		}
+		
+	}
+	void free(FibonancciHeapNode<T>* n)
+	{
+		n->color = 'b';
+		if (n->first_child)
+			free(n->first_child);
+		if (n->next && n->next->color=='w')
+			free(n->next);
+		if (n->parent)
+		{
+			n->parent->cutChild(n);
+		}
+		delete n;
+
+
+	}
+public:
+	FibonancciHeap(const T& data)
+	{
+		root = new FibonancciHeapNode<T>(data);
+		auto temp = new FibonancciHeapNode<T>(data);
+		root->addChild(temp);
+		size = 1;
+	}
+	bool isEmpty()
+	{
+		return !root->first_child;
+	}
+	void insert(const T& data)
+	{
+		auto temp = new FibonancciHeapNode<T>(data);
+		auto min = root->first_child;
+		root->addChild(temp);
+		if (min != nullptr)
+		{
+			if (data < min->data)
+			{
+				root->first_child = temp;
+			}
+		}
+		this->size++;
+	}
+	T getMin()
+	{
+		if (this->isEmpty())throw"it is empty list";
+		return root->first_child->data;
+	}
+	T extractMin()
+	{
+		if (this->isEmpty())throw"it is empty list";
+		FibonancciHeapNode<T>* min = this->root->first_child;
+		root->cutChild(min);
+		while (min->first_child)
+		{
+		
+			auto temp = min->first_child;
+			min->cutChild(temp);
+			root->addChild(temp);
+			
+			
+		}
+		updateMin();
+		consolidate();
+		T res = min->data;
+		delete min;
+		min = nullptr;
+		this->size--;
+		return res;
+
+	}
+	void clear()
+	{
+		T root_data = root->data;
+		this->free(this->root);
+		this->root = new FibonancciHeapNode<T>(root->data);
+		this->size = 0;
+	}
+	~FibonancciHeap()
+	{
+		this->clear();
+	}
+};

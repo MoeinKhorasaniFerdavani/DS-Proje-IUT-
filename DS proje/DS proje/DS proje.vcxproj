@@ -146,6 +146,8 @@
     <ClInclude Include="BST.h" />
     <ClInclude Include="BTreeNode.h" />
     <ClInclude Include="CircularLinkedList.h" />
+    <ClInclude Include="FibonancciHeap.h" />
+    <ClInclude Include="FibonancciHeapNode.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="MapPair.h" />
     <ClInclude Include="Node.h" />
