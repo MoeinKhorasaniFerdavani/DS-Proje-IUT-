@@ -22,6 +22,10 @@ public:
 		if (this->find(MapPair<K,T>(key, value)) == false)
 			AVLTree<MapPair<K,T>>::insert(MapPair<K, T>(key, value));
 	}
+	T remove(const K& key)
+	{
+		return AVLTree<MapPair<K, T>>::remove(MapPair<K, T>(key, default_val)).value;
+	}
 	T& operator[] (const K& key)
 	{
 		MapPair<K, T>temp(key, default_val);

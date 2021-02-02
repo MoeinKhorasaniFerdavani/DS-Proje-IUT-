@@ -7,7 +7,10 @@ class MapPair
 	K key;
 public:
 	T value;
+	MapPair()
+	{
 
+	}
 	MapPair(const K& key, const T& value)
 	{
 		this->key = key;

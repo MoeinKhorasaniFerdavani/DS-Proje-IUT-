@@ -40,7 +40,7 @@ public:
 	}
 	bool operator!= (const Queue<T>& other)
 	{
-		return return LinkedList<T>::operator==(other);
+		 return LinkedList<T>::operator==(other);
 	}
 
 

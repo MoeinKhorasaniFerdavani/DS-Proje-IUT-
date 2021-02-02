@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClInclude Include="AVLTree.h" />
     <ClInclude Include="BST.h" />
+    <ClInclude Include="BSTIterator.h" />
     <ClInclude Include="BTreeNode.h" />
     <ClInclude Include="Castle.h" />
     <ClInclude Include="CircularLinkedList.h" />

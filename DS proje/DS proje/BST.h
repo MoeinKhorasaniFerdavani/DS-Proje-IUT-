@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <iostream>
 #include "BTreeNode.h"
+#include "BSTIterator.h"
 using namespace std;
 
 template <class  T>
@@ -308,6 +309,31 @@ public:
 		cout << endl;
 		printBT("", this->root, false);
 		cout << endl;
+	}
+	BSTIterator<T> begin()
+	{
+		if (this->isEmpty())
+		{
+			BSTIterator<T>res(nullptr);
+			return res;
+		}
+		else
+		{
+			Stack<MapPair<BTreeNode<T>*, int>>temp;
+			BTreeNode<T>* curr = this->root;
+			for (; curr->left != nullptr; curr = curr->left)
+			{
+				temp.push(MapPair<BTreeNode<T>*, int>(curr, 1));
+			}
+			temp.push(MapPair<BTreeNode<T>*, int>(curr, 2));
+			BSTIterator<T>res(curr, temp);
+			return res;
+		}
+	}
+	BSTIterator<T> end()
+	{
+		BSTIterator<T>res(nullptr);
+		return res;
 	}
 };
 

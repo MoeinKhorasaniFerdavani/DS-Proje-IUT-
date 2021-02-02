@@ -77,5 +77,8 @@
     <ClInclude Include="Castle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BSTIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
