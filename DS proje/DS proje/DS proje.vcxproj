@@ -150,10 +150,12 @@
     <ClInclude Include="FibonancciHeapNode.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MapIterator.h" />
     <ClInclude Include="MapPair.h" />
     <ClInclude Include="MyVector.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Queue.h" />
+    <ClInclude Include="Stack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

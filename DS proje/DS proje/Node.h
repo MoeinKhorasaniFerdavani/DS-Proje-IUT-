@@ -11,8 +11,9 @@ public:
 	T data;
 	Node<T>* befor=nullptr, * next = nullptr;
 	Node(const T& data, Node<T>* befor = nullptr, Node<T>* next = nullptr)
+		:data(data)
 	{
-		this->data = data;
+		
 		this->befor = befor;
 		this->next = next;
 	}

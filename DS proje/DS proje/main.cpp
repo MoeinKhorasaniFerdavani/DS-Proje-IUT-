@@ -10,31 +10,25 @@
 #include "FibonancciHeap.h"
 #include "Map.h"
 #include "MyVector.h"
+#include "MapIterator.h"
 
 
 
 int main()
 {
-	class coord
+	Map<int, string>m(0,"moein");
+	m.insert(1, "ali");
+	m.insert(127, "mohammad");
+	m.insert(2, "avin");
+	m.insert(3, "amir");
+	m.insert(5, "amirreza");
+	m.insert(4, "hosein");
+	MapIterator<int, string> it = m.begin();
+	for (; it != m.end(); it++)
 	{
-		int x, y;
-		public:
-		coord(int x, int y)
-		{
-			this->x = x;
-			this->y = y;
-		}
-	};
-	AVLTree<int>a;
-	a.insert(0);
-	a.insert(1);
-	a.insert(2);
-	MyVector<coord>v(coord(2, 3));
-	coord c(1, 2);
-	for (int i = 0; i < 10; i++)
-	{
-		v.pushBack(c);
+		cout << it->value<< endl;
 	}
+
 
 	return 0;
 }

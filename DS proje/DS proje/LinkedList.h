@@ -11,6 +11,21 @@ protected:
 	int list_size=0;
 public:
 	LinkedList() { ; }
+	LinkedList(const LinkedList<T>& other)
+	{
+		for (Node<T>* curr = other.head; curr != nullptr; curr = curr->next)
+		{
+			this->pushBack(curr->data);
+		}
+	}
+	LinkedList(LinkedList<T>&& other)
+	{
+		this->head = other.head;
+		this->tail = other.tail;
+		this->list_size = other.list_size;
+		other.head = other.tail = nullptr;
+		other.list_size = 0;
+	}
 	~LinkedList()
 	{
 		while (this->isEmpty() == false)
@@ -118,6 +133,33 @@ public:
 			curr = curr->next;
 		}
 		cout << endl;
+	}
+	bool operator ==(const LinkedList<T>& other)
+	{
+		Node<T>* curr = this->head, * other_curr = other.head;
+		for (; curr != nullptr && other_curr!=nullptr; curr = curr->next,other_curr=other_curr->next)
+		{
+			if (curr->data != other_curr->data)
+				return false;
+
+		}
+		if (curr == nullptr && other_curr == nullptr)
+			return true;
+		else
+			return false;
+	}
+	LinkedList<T> operator= (const LinkedList<T>& other)
+	{
+		this->~LinkedList();
+		for (Node<T>* curr = other.head; curr != nullptr; curr = curr->next)
+		{
+			this->pushBack(curr->data);
+		}
+		return other;
+	}
+	bool operator != (const LinkedList<T>& other)
+	{
+		return !(*this == other);
 	}
 };
 
