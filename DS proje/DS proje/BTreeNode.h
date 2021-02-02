@@ -10,9 +10,10 @@ public:
 	T data;
 	BTreeNode<T>* parent = nullptr, * left = nullptr, * right = nullptr;
 	int height = 0;
-	BTreeNode(const T& data, BTreeNode<T>* parent = nullptr, BTreeNode<T>* left=nullptr, BTreeNode<T>* right=nullptr)
+	BTreeNode(const T& input_data, BTreeNode<T>* parent = nullptr, BTreeNode<T>* left=nullptr, BTreeNode<T>* right=nullptr)
+		:data(input_data)
 	{
-		this->data = data;
+		
 		this->parent = parent;
 		this->left = left;
 		this->right = right;

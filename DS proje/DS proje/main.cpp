@@ -1,4 +1,5 @@
-﻿#include <iostream>
+﻿using namespace std;
+#include <iostream>
 #include "linkedlist.h"
 #include "Queue.h"
 #include "MapPair.h"
@@ -7,28 +8,33 @@
 #include "CircularLinkedList.h"
 #include "FibonancciHeapNode.h"
 #include "FibonancciHeap.h"
-using namespace std;
+#include "Map.h"
+#include "MyVector.h"
+
+
 
 int main()
 {
-	FibonancciHeap<int>f(2);
-	f.insert(1);
-	f.insert(7);
-	f.extractMin();
-	f.insert(5);
-	f.insert(0);
-	
-	f.insert(1);
-	f.extractMin();
-	f.insert(4);
-	f.insert(3);
-	
-	f.extractMin();
-	cout << f.getMin() << endl;
-	f.clear();
-	f.insert(10);
-	f.insert(11);
-	f.extractMin();
-	cout << f.getMin() << endl;
+	class coord
+	{
+		int x, y;
+		public:
+		coord(int x, int y)
+		{
+			this->x = x;
+			this->y = y;
+		}
+	};
+	AVLTree<int>a;
+	a.insert(0);
+	a.insert(1);
+	a.insert(2);
+	MyVector<coord>v(coord(2, 3));
+	coord c(1, 2);
+	for (int i = 0; i < 10; i++)
+	{
+		v.pushBack(c);
+	}
+
 	return 0;
 }

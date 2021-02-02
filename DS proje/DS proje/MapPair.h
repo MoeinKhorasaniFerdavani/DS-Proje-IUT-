@@ -14,27 +14,27 @@ public:
 		this->value = value;
 	}
 	K getKey() { return this->key; }
-	bool operator> (const MapPair<K, T>& other)
+	bool operator > (const MapPair<K, T>& other)const
 	{
 		return (this->key > other.key);
 	}
-	bool operator< (const MapPair<K, T>& other)
+	bool operator < (const MapPair<K, T>& other)const
 	{
 		return (this->key < other.key);
 	}
-	bool operator>= (const MapPair<K, T>& other)
+	bool operator >= (const MapPair<K, T>& other)const
 	{
 		return (this->key >= other.key);
 	}
-	bool operator<= (const MapPair<K, T>& other)
+	bool operator <= (const MapPair<K, T>& other)const
 	{
 		return (this->key <= other.key);
 	}
-	bool operator== (const MapPair<K, T>& other)
+	bool operator == (const MapPair<K, T>& other)const
 	{
 		return (this->key == other.key);
 	}
-	bool operator!= (const MapPair<K, T>& other)
+	bool operator != (const MapPair<K, T>& other)const
 	{
 		return (this->key != other.key);
 	}

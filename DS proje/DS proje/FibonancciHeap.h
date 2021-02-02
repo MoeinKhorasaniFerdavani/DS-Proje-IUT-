@@ -147,6 +147,43 @@ public:
 		return res;
 
 	}
+	void decreaseKey(FibonancciHeapNode<T>* n, const T& new_value)
+	{
+		n->data = new_value;
+		if (n->parent == this->root)
+		{
+			if (n->data < this->getMin())
+				this->root->first_child = n;
+			return;
+		}
+		//n->data updated
+		if (n->data <n->parent->data)
+		{
+			
+			for (FibonancciHeapNode<T>* curr = n; curr->parent != this->root;)
+			{
+				FibonancciHeapNode<T>* p = curr->parent;
+				bool b = p->marked;
+				p->cutChild(curr);
+				root->addChild(curr);
+				curr->marked = false;
+				if (b == false)break;
+				else
+				{
+					p->marked = true;
+					curr = p;
+				}
+
+			}
+			
+			
+			
+		}
+		else
+		{
+			
+		}
+	}
 	void clear()
 	{
 		T root_data = root->data;
