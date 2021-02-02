@@ -16,19 +16,16 @@
 
 int main()
 {
-	Map<int, string>m(0,"moein");
-	m.insert(1, "ali");
-	m.insert(127, "mohammad");
-	m.insert(2, "avin");
-	m.insert(3, "amir");
-	m.insert(5, "amirreza");
-	m.insert(4, "hosein");
-	MapIterator<int, string> it = m.begin();
-	for (; it != m.end(); it++)
+	MyVector<int>v;
+	for (int i = 0; i < 10; i++)
+		v.pushBack(i);
+	for (int i = 0; i < v.size(); i ++ )
+		cout << v[i] << endl;
+	for (int i = 0; i < 10; i++)
 	{
-		cout << it->value<< endl;
+		v.popBack();
 	}
-
-
+	v.pushBack(3);
+	cout << "Cap:" << v.capicity() << endl;;
 	return 0;
 }

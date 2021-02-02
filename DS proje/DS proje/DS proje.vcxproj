@@ -139,12 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Castle.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Solider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AVLTree.h" />
     <ClInclude Include="BST.h" />
     <ClInclude Include="BTreeNode.h" />
+    <ClInclude Include="Castle.h" />
     <ClInclude Include="CircularLinkedList.h" />
     <ClInclude Include="FibonancciHeap.h" />
     <ClInclude Include="FibonancciHeapNode.h" />
@@ -155,7 +158,9 @@
     <ClInclude Include="MyVector.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Queue.h" />
+    <ClInclude Include="Solider.h" />
     <ClInclude Include="Stack.h" />
+    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

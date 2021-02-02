@@ -34,6 +34,14 @@ public:
 	{
 		LinkedList<T>::print();
 	}
+	bool operator==(const Queue<T>& other)
+	{
+		return LinkedList<T>::operator==(other);
+	}
+	bool operator!= (const Queue<T>& other)
+	{
+		return return LinkedList<T>::operator==(other);
+	}
 
 
 };

@@ -6,14 +6,14 @@ template <class T>
 class MyVector
 {
 	T* arr = nullptr;
-	int vec_capicity = 1;
+	int vec_capicity = 0;
 	int vec_size = 0;
 	
 	void increaseCapicity()
 	{
 		if (vec_size == vec_capicity)
 		{
-			vec_capicity *= 2;
+			vec_capicity =vec_capicity* 2+1;
 			T* temp = new T[vec_capicity];
 			for (int i = 0; i < vec_capicity/2; i++)
 			{
@@ -43,6 +43,11 @@ class MyVector
 		return;
 	}
 public:
+	MyVector()
+	{
+		arr=new T();
+		vec_capicity++;
+	}
 	MyVector(const T& data)
 		
 	{
@@ -87,6 +92,8 @@ public:
 	{
 		delete[]arr;
 		arr = nullptr;
+		vec_size = 0;
+		vec_capicity = 0;
 	}
 	T& operator[] (int index)
 	{

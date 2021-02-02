@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "FibonancciHeapNode.h"
+#include "MyVector.h"
 using namespace std;
 
 template <class T>
@@ -92,6 +93,53 @@ class FibonancciHeap
 		delete n;
 
 
+	}
+	FibonancciHeapNode<T>* findPtr(const T& data, FibonancciHeapNode<T>* n)//o(n)
+	{
+		if (n == nullptr)return nullptr;
+		if (n->data == data)return n;
+		MyVector<FibonancciHeapNode<T>*>temp;
+		if (n->first_child != nullptr)
+		{
+			for (auto curr = n->first_child;;)
+			{
+				temp.pushBack(curr);
+				curr = curr->next;
+				if (curr = n->first_child)
+					break;
+			}
+		}
+		for (int i = 0; i < temp.size(); i++)
+		{
+			if (findPtr(data,temp[i]) != nullptr)
+				return temp[i];
+		}
+		return nullptr;
+	}
+	FibonancciHeapNode<T>* findPtr(const T& data)
+	{
+		MyVector<FibonancciHeapNode<T>*>temp;
+		for (auto curr = root->first_child;;)
+		{
+			temp.pushBack(curr);
+			curr = curr->next;
+			if (curr = root->first_child)
+				break;
+		}
+		for (int i = 0; i < temp.size(); i++)
+		{
+			if (findPtr(data, temp[i]) != nullptr)
+				return temp[i];
+		}
+		return nullptr;
+		
+	}
+	int depthNode(FibonancciHeapNode<T>* n)
+	{
+		auto curr = n;
+		int i = 0;
+		for (; curr != nullptr; curr = curr->parent, i++);
+		return i - 1;
 	}
 public:
 	FibonancciHeap(const T& data)
