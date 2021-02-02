@@ -31,9 +31,9 @@ class FibonancciHeap
 	{
 		if (isEmpty())return;
 		//allocation the array that should hold the address of node with sepephic degree
-		FibonancciHeapNode<T>** arr = new FibonancciHeapNode<T>*[log2(this->size)];
+		FibonancciHeapNode<T>** arr = new FibonancciHeapNode<T>*[ceil(log2(this->size))];
 		//initilze it with nullptr
-		for (int i = 0; i < log2(this->size);i++)
+		for (int i = 0; i < ceil(log2(this->size));i++)
 		{
 			arr[i] = nullptr;
 		}
