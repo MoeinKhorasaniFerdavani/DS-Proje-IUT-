@@ -11,7 +11,7 @@
 #include "Map.h"
 #include "MyVector.h"
 #include "MapIterator.h"
-
+//#include "Castle.h"
 
 
 int main()
