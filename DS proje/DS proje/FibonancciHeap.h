@@ -200,12 +200,12 @@ public:
 		n->data = new_value;
 		if (n->parent == this->root)
 		{
-			if (n->data < this->getMin())
+			if (n->data <= this->getMin())
 				this->root->first_child = n;
 			return;
 		}
 		//n->data updated
-		if (n->data <n->parent->data)
+		if (n->data <=n->parent->data)
 		{
 			
 			for (FibonancciHeapNode<T>* curr = n; curr->parent != this->root;)
@@ -231,6 +231,17 @@ public:
 		{
 			
 		}
+	}
+	void deleteNode(FibonancciHeapNode<T>* n)
+	{
+		this->decreaseKey(n, root->first_child->data);
+		this->extractMin();
+		return;
+	}
+	void deleteNode(const T& data)
+	{
+		FibonancciHeapNode<T>* temp = findPtr(data);
+		deleteNode(temp);
 	}
 	void clear()
 	{
