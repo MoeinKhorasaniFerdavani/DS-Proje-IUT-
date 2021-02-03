@@ -150,8 +150,10 @@
     <ClInclude Include="BTreeNode.h" />
     <ClInclude Include="Castle.h" />
     <ClInclude Include="CircularLinkedList.h" />
+    <ClInclude Include="Edge.h" />
     <ClInclude Include="FibonancciHeap.h" />
     <ClInclude Include="FibonancciHeapNode.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapIterator.h" />
