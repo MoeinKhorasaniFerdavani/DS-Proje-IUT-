@@ -6,13 +6,16 @@ int Castle::max_output = 12;
 Castle::Castle(const string& name)
 {
 	this->name = name;
+	last_id++;
+	castles_map.insert(last_id, this);
+	
 }
 
-void Castle::addSolider(const string& name, const string& family, double power, double speed)
+int Castle::addSolider( double power, double speed)
 {
-	Solider s(name, family, this->id, power, speed);
+	Solider s( this->id, power, speed);
 	inside_solider.insert(MapPair<double, int>(power, s.getId()));
-
+	return s.getId();
 
 }
 

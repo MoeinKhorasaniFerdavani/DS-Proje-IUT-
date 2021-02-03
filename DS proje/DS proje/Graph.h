@@ -11,8 +11,9 @@ class Graph
 	Map<Vertex<T>*, int>v_index;
 public:
 	Graph()
+		:v_index(nullptr,0)
 	{
-		;
+		v_index.remove(nullptr);
 	}
 	Graph(MyVector<Vertex<T>> v)
 		:v_index(&v[0],0)
@@ -62,14 +63,14 @@ public:
 	~Graph()
 	{
 		for(int i=0;i<vertexSize();i++)
-			for (j = 0; j < vertexSize(); j++)
+			for (int j = 0; j < vertexSize(); j++)
 			{
 				delete adj_arr[i][j];
 				adj_arr[i][j] = nullptr;
 			}
 		for (MapIterator<Vertex<T>*, int> it = v_index.begin(); it != v_index.end(); it++)
 		{
-			delete it->key;
+			delete (it->getKey());
 		}
 	}
 };

@@ -20,7 +20,7 @@ class Castle
 	Queue<int>input_gate;//solider id
 public:
 	Castle(const string& name);
-	void addSolider(const string& name, const string& family,double power, double speed);
+	int addSolider(double power, double speed);
 	int findOppenent(int other_id);
 
 };

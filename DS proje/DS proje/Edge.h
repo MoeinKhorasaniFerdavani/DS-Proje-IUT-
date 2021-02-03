@@ -31,6 +31,13 @@ public:
 	{
 		return this->out;
 	}
+	Edge<T, K> operator= (const Edge<T, K>& other)
+	{
+		this->data = other.data;
+		this->in = other.in;
+		this->out = other.out;
+		this->weight = other.weight;
+	}
 
 };
 

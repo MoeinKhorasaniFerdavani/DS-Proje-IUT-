@@ -8,6 +8,7 @@ class Screen:public Graph<Castle,Road>
 	int last_id = 0;
 public:
 	Screen(int v_number);
-
+	Screen() {};
+	void addCastle(const Castle& c);
 };
 

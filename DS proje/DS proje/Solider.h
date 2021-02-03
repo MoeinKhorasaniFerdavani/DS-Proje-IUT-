@@ -9,12 +9,11 @@ class Solider
 
 	int id;
 	int belong_castle_id;
-	string name, family;
 	double power;
 	double speed;
 
 public:
-	Solider(string name, string family, int belong_castle_id, double power, double speed);
+	Solider(int belong_castle_id, double power, double speed);
 	~Solider();
 	double getPow();
 	double getSpeed();

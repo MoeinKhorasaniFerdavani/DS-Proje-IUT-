@@ -2,10 +2,9 @@
 Map<int, Solider*> Solider::soliders_map(-1,nullptr);
 int Solider::last_id = 0;
 
-Solider::Solider(string name, string family, int belong_castle_id, double power, double speed)
+Solider::Solider( int belong_castle_id, double power, double speed)
 {
-	this->name = name;
-	this->family = family;
+	
 	this->id = last_id;
 	this->belong_castle_id = belong_castle_id;
 	this->power = power;

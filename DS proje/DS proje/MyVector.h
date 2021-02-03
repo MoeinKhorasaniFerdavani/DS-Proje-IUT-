@@ -32,6 +32,7 @@ class MyVector
 
 			vec_capicity /= 2;
 			T* temp = new T[vec_capicity];
+			
 			for (int i = 0; i < vec_size; i++)
 			{
 				temp[i] = arr[i];
@@ -39,6 +40,8 @@ class MyVector
 			delete[] arr;
 			arr = nullptr;
 			arr = temp;
+			if (vec_capicity == 0)
+				arr = nullptr;
 		}
 		return;
 	}
@@ -58,12 +61,34 @@ public:
 	}
 	MyVector(const MyVector<T>& other)
 	{
-		this->vec_capicity = other->vec_capicity;
+		this->vec_capicity = other.vec_capicity;
 		this->vec_size = other.vec_size;
 		for (int i = 0; i < other.vec_capicity; i++)
 		{
 			this->arr[i] = other.arr[i];
 		}
+	}
+	MyVector<T> operator= (const MyVector<T>& other)
+	{
+		delete this->arr;
+		arr = nullptr;
+		this->vec_capicity = other.vec_capicity;
+		this->vec_size = other.vec_size;
+		this->arr = new T[this->vec_capicity];
+		for (int i = 0; i < vec_size; i++)
+		{
+			arr[i] = other.arr[i];
+		}
+		return other;
+	}
+	MyVector(const MyVector<T>&& other)
+	{
+		this->arr = other.arr;
+		this->vec_size = other.vec_size;
+		this->vec_capicity = other.vec_capicity;
+		other.arr = nullptr;
+		other.vec_size = 0;
+		other.vec_capicity = 1;
 	}
 	void pushBack(const T& data)
 	{
@@ -90,7 +115,7 @@ public:
 	}
 	void clear()
 	{
-		delete[]arr;
+		//delete[]arr;
 		arr = nullptr;
 		vec_size = 0;
 		vec_capicity = 0;
