@@ -9,6 +9,11 @@ class Graph
 {
 	MyVector<MyVector<Edge<T, K>*>>adj_arr;
 	Map<Vertex<T>*, int>v_index;
+public:
+	Graph()
+	{
+		;
+	}
 	Graph(MyVector<Vertex<T>> v)
 		:v_index(&v[0],0)
 	{
@@ -33,6 +38,22 @@ class Graph
 		int i = v_index[in];
 		int j = v_index[out];
 		adj_arr[i][j] = new Edge<T, K>(e);
+	}
+	void addVertex(const Vertex<T>& v)
+	{
+		for (int i = 0; i < vertexSize(); i++)
+		{
+			adj_arr[i].pushBack(nullptr);
+
+		}
+		MyVector<Edge<T, K>*> last_row;
+		for (int i = 0; i < vertexSize(); i++)
+		{
+			last_row.pushBack(nullptr);
+		}
+		adj_arr.pushBack(last_row);
+		Vertex<T>* temp = new Vertex<T>(v);
+		v_index.insert(temp, vertexSize() - 1);
 	}
 	int vertexSize()
 	{

@@ -141,6 +141,8 @@
   <ItemGroup>
     <ClCompile Include="Castle.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Road.cpp" />
+    <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Solider.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +163,8 @@
     <ClInclude Include="MyVector.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="Queue.h" />
+    <ClInclude Include="Road.h" />
+    <ClInclude Include="Screen.h" />
     <ClInclude Include="Solider.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="Vertex.h" />

@@ -9,7 +9,7 @@ class Vertex
 	char color = 'w';
 public:
 	T data;
-	int getId()
+	int getId()const
 	{
 		return this->id;
 	}
