@@ -302,5 +302,24 @@ public:
 		  auto n = this->findPtr(input);
 		  return deleteNode(n);
 	  }
-
+	  BTreeNode<T>* findPtr(const T& input)
+	  {
+		  return BST<T>::findPtr(input);
+	  }
+	  bool isMin(BTreeNode<T>* n)
+	  {
+		  return BST<T>::isMin(n);
+	  }
+	  bool isMax(BTreeNode<T>* n)
+	  {
+		  return BST<T>::isMax(n);
+	  }
+	  T preccesor(const T& input)
+	  {
+		  return BST<T>::preccesor(input);
+	  }
+	  T successor(const T& input)
+	  {
+		  return BST<T>::successor(input);
+	  }
 };

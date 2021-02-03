@@ -31,6 +31,11 @@ public:
 		MapPair<K, T>temp(key, default_val);
 		return (this->findPtr(temp))->data.value;
 	}
+	bool exist(const K& key)
+	{
+		MapPair<K, T>temp(key, default_val);
+		return (this->findPtr(temp));
+	}
 
 	MapIterator<K, T> begin()
 	{

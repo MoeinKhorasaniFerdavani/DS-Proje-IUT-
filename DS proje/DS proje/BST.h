@@ -71,25 +71,30 @@ protected:
 			return curr;
 		}
 	}
-	BTreeNode<T>* findPtr(const T& input)
+	BTreeNode<T>* preccesor(BTreeNode<T>* n)
 	{
-		BTreeNode<T>* curr = this->root;
-		while (curr != nullptr)
+		if (n == nullptr)return nullptr;
+		if (n->left == nullptr)
 		{
-			if (curr->data == input)
-				return curr;
-			if (input >= curr->data)
+			if (n->isRightChild())return n->parent;
+			BTreeNode<T>* curr = n;
+			while (curr->isLeftChild())
+			{
+				curr = curr->parent;
+			}
+			return curr->parent;
+		}
+		else
+		{
+			BTreeNode<T>* curr = n->left;
+			while (curr->right != nullptr)
 			{
 				curr = curr->right;
 			}
-			else
-			{
-				curr = curr->left;
-			}
-
+			return curr;
 		}
-		return nullptr;
 	}
+
 	BTreeNode<T>* insertPrivate(const T& input)
 	{
 		if (this->isEmpty())
@@ -250,7 +255,27 @@ protected:
 		n = nullptr;
 	}
 public:
+	
 	BST() { ; }
+	BTreeNode<T>* findPtr(const T& input)
+	{
+		BTreeNode<T>* curr = this->root;
+		while (curr != nullptr)
+		{
+			if (curr->data == input)
+				return curr;
+			if (input >= curr->data)
+			{
+				curr = curr->right;
+			}
+			else
+			{
+				curr = curr->left;
+			}
+
+		}
+		return nullptr;
+	}
 	void clear()
 	{
 		clearPrivate(this->root);
@@ -289,7 +314,17 @@ public:
 		}
 		return 0;
 	}
-	T succesor(const T& input)
+	T preccesor(const T& input)
+	{
+		auto n = findPtr(input);
+		auto s = preccesor(n);
+		if (s != nullptr)
+		{
+			return s->data;
+		}
+		throw "error";
+	}
+	T successor(const T& input)
 	{
 		auto n = findPtr(input);
 		auto s = succesor(n);
@@ -334,6 +369,28 @@ public:
 	{
 		BSTIterator<T>res(nullptr);
 		return res;
+	}
+	bool isMin(BTreeNode<T>* n)
+	{
+		if (this->isEmpty())
+			return !n;
+		auto curr = this->root;
+		while (curr->left)
+		{
+			curr = curr->left;
+		}
+		return n == curr;
+	}
+	bool isMax(BTreeNode<T>* n)
+	{
+		if (this->isEmpty())
+			return !n;
+		auto curr = this->root;
+		while (curr->right)
+		{
+			curr = curr->right;
+		}
+		return n == curr;
 	}
 };
 
